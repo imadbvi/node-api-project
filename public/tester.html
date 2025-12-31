@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+            font-family: monospace;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        #response {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            border: 1px solid #ddd;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="back-link">← Terug naar Home</a>
+    <h1>API Tester</h1>
+
+    <div class="form-group">
+        <label>Method</label>
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>URL</label>
+        <input type="text" id="url" value="/api/users">
+    </div>
+
+    <div class="form-group">
+        <label>Body (JSON)</label>
+        <textarea id="body" placeholder='{"name": "Test", "email": "test@test.com"}'></textarea>
+    </div>
+
+    <button onclick="sendRequest()">Send Request</button>
+
+    <h3>Response Status: <span id="status">-</span></h3>
+    <div id="response">Response will appear here...</div>
+
+    <script>
+        async function sendRequest() {
+            const method = document.getElementById('method').value;
+            const url = document.getElementById('url').value;
+            const bodyStr = document.getElementById('body').value;
+            const responseEl = document.getElementById('response');
+            const statusEl = document.getElementById('status');
+
+            responseEl.textContent = "Sending...";
+
+            try {
+                const options = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+
+                if (method !== 'GET' && method !== 'DELETE' && bodyStr.trim()) {
+                    // Start basic JSON validation
+                    try {
+                        JSON.parse(bodyStr);
+                    } catch (e) {
+                        alert("Invalid JSON in body!");
+                        responseEl.textContent = "Invalid JSON";
+                        return;
+                    }
+                    options.body = bodyStr;
+                }
+
+                const res = await fetch(url, options);
+                statusEl.textContent = res.status + ' ' + res.statusText;
+
+                let data;
+                const contentType = res.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    data = await res.json();
+                    responseEl.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    data = await res.text();
+                    responseEl.textContent = data;
+                }
+            } catch (error) {
+                statusEl.textContent = "Error";
+                responseEl.textContent = error.message;
+            }
+        }
+    </script>
+</body>
+
+</html>
