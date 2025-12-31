@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        .endpoint {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .method {
+            font-weight: bold;
+            color: #fff;
+            background: #3498db;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .method.GET {
+            background: #61affe;
+        }
+
+        .method.POST {
+            background: #49cc90;
+        }
+
+        .method.PUT {
+            background: #fca130;
+        }
+
+        .method.DELETE {
+            background: #f93e3e;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>API Documentation</h1>
+    <p>Welcome to the REST API. Below is the list of available endpoints.</p>
+
+    <h2>Users</h2>
+    <div class="endpoint">
+        <span class="method GET">GET</span> <code>/api/users</code>
+        <p>List all users. Supports pagination (limit, offset), search (name, email), and sorting.</p>
+        <p><i>Query Params:</i> limit, offset, search, sort, order</p>
+    </div>
+    <div class="endpoint">
+        <span class="method GET">GET</span> <code>/api/users/:id</code>
+        <p>Get a specific user by ID.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>/api/users</code>
+        <p>Create a new user. Requires name and email. Phone optional (+32 4xx...).</p>
+    </div>
+    <div class="endpoint">
+        <span class="method PUT">PUT</span> <code>/api/users/:id</code>
+        <p>Update a user. Requires name and email.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method DELETE">DELETE</span> <code>/api/users/:id</code>
+        <p>Delete a user.</p>
+    </div>
+
+    <h2>News Posts</h2>
+    <div class="endpoint">
+        <span class="method GET">GET</span> <code>/api/news</code>
+        <p>List news posts. Supports pagination, search, and sorting.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method GET">GET</span> <code>/api/news/:id</code>
+        <p>Get a specific news post.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>/api/news</code>
+        <p>Create a news post. Requires title, content, and user_id.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method PUT">PUT</span> <code>/api/news/:id</code>
+        <p>Update a news post.</p>
+    </div>
+    <div class="endpoint">
+        <span class="method DELETE">DELETE</span> <code>/api/news/:id</code>
+        <p>Delete a news post.</p>
+    </div>
+</body>
+
+</html>
