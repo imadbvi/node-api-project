@@ -116,6 +116,32 @@
         <span class="method DELETE">DELETE</span> <code>/api/news/:id</code>
         <p>Delete a news post.</p>
     </div>
+
+    <h2>Extra Features & Testing</h2>
+    <div class="endpoint">
+        <h3>1. Search functionality</h3>
+        <p>Filter users by name.</p>
+        <code>GET /api/users?search=...</code>
+    </div>
+
+    <div class="endpoint">
+        <h3>2. Pagination</h3>
+        <p>Limit the number of results per page.</p>
+        <code>GET /api/users?limit=...</code>
+    </div>
+
+    <div class="endpoint">
+        <h3>3. Sorting</h3>
+        <p>Sort users by name (A-Z).</p>
+        <code>GET /api/users?sort=name</code>
+    </div>
+
+    <hr>
+    <h2>🛠 Manual Testing Tool</h2>
+    <p>Use the built-in API Tester to perform POST, PUT, and DELETE actions directly from your browser.</p>
+    <p><a href="/tester.html"
+            style="background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Open
+            API Tester</a></p>
 </body>
 
 </html>
